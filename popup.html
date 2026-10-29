@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="vi" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Owlys Quiz</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main class="popup">
+
+    <!-- Header Section -->
+    <header class="header">
+      <div class="brand">
+        <div class="logo" aria-hidden="true" title="Owlys Quiz">
+          <img src="icons/icon48.png" alt="Owlys Quiz Logo">
+        </div>
+        <div class="brand-text">
+          <div class="brand-title-row">
+            <h1>Owlys Quiz</h1>
+            <span class="badge-studio">STUDIO</span>
+          </div>
+          <div class="status-indicator">
+            <span class="status-pulse-dot"></span>
+            <span id="status">Sẵn sàng</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <button id="btnRestart" class="icon-action-btn" type="button" title="Khởi động lại tiện ích (Alt + R)" aria-label="Khởi động lại tiện ích">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+          </svg>
+        </button>
+
+        <button id="themeToggle" class="icon-action-btn" type="button" title="Đổi giao diện sáng/tối" aria-label="Chuyển sáng/tối">
+          <svg id="iconMoon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 1 0 9.79 9.79z"/>
+          </svg>
+          <svg id="iconSun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" hidden>
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+        </button>
+
+        <button id="enabled" class="switch" type="button" role="switch" aria-checked="true" title="Bật/tắt tiện ích" aria-label="Bật Owlys Quiz">
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Cloud Status Pill -->
+    <div class="status-bar-pill">
+      <div class="status-bar-left">
+        <span class="status-bar-dot"></span>
+        <span class="status-bar-text">Owlys Cloud Network · Connected</span>
+      </div>
+      <span class="status-bar-badge">v2.2</span>
+    </div>
+
+    <!-- Actions Hub -->
+    <section class="card actions-hub">
+      <!-- Mode Selector -->
+      <div class="answer-mode-section">
+        <div class="answer-mode-header">
+          <span class="answer-mode-label">TỐC ĐỘ GIẢI ĐỀ</span>
+          <span class="answer-mode-subtext">Reasoning Mode</span>
+        </div>
+
+        <div class="answer-mode-row" role="radiogroup" aria-label="Chế độ giải đề">
+          <label class="mode-radio is-selected" for="modeFast" title="Chế độ Nhanh: Trả lời siêu tốc dưới 3 giây">
+            <input id="modeFast" name="answerMode" type="radio" value="fast" checked>
+            <div class="mode-content">
+              <svg class="mode-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+              </svg>
+              <span class="mode-name">Nhanh</span>
+              <span class="mode-badge">Tức thì</span>
+            </div>
+          </label>
+
+          <label class="mode-radio" for="modeAccurate" title="Chế độ Chính xác: Rà soát bẫy đề thi nâng cao">
+            <input id="modeAccurate" name="answerMode" type="radio" value="accurate">
+            <div class="mode-content">
+              <svg class="mode-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <circle cx="12" cy="12" r="6"/>
+                <circle cx="12" cy="12" r="2"/>
+              </svg>
+              <span class="mode-name">Chính xác</span>
+              <span class="mode-badge">Kỹ lưỡng</span>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Hero Trigger: Chụp & Giải -->
+      <button id="capture" class="hero-capture-btn" type="button">
+        <div class="capture-btn-content">
+          <div class="capture-icon-bubble">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 7V5a2 2 0 0 1 2-2h2"/>
+              <path d="M17 3h2a2 2 0 0 1 2 2v2"/>
+              <path d="M21 17v2a2 2 0 0 1-2 2h-2"/>
+              <path d="M7 21H5a2 2 0 0 1-2-2v-2"/>
+              <polyline points="8 12 11 15 16 9"/>
+            </svg>
+          </div>
+          <span class="capture-main-label">Chụp &amp; Giải Đề</span>
+        </div>
+        <kbd class="kbd-badge">Alt + Q</kbd>
+      </button>
+
+      <!-- Auto Solver Switch -->
+      <div class="feature-card">
+        <div class="feature-card-left">
+          <div class="feature-icon-badge">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+          </div>
+          <div class="feature-info">
+            <div class="feature-title-row">
+              <b>Auto Wayground</b>
+              <kbd class="kbd-mini">Alt + A</kbd>
+            </div>
+            <small>Tự động chọn đáp án khi chuyển câu</small>
+          </div>
+        </div>
+
+        <button id="autoWayground" class="switch small" type="button" role="switch" aria-checked="false" aria-label="Bật Auto Wayground">
+          <span></span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Stealth HUD Customization Card -->
+    <section class="card stealth-card">
+      <div class="section-card-header">
+        <span class="section-card-title">NGỤY TRANG HUD ĐÁP ÁN</span>
+      </div>
+
+      <div class="stealth-radio-group">
+        <button id="btnStyleDark" class="stealth-btn is-active" type="button">
+          <span>Nền Đen Mờ</span>
+        </button>
+        <button id="btnStyleTransparent" class="stealth-btn" type="button">
+          <span>Trong Suốt</span>
+        </button>
+      </div>
+
+      <div class="slider-row">
+        <div class="slider-label-row">
+          <span>Kích thước chữ</span>
+          <span id="hudSizeLabel" class="slider-val">24px</span>
+        </div>
+        <input id="hudSlider" type="range" min="14" max="44" step="2" value="24" class="custom-range-slider">
+      </div>
+
+      <div class="slider-row">
+        <div class="slider-label-row">
+          <span>Độ rõ nét (Opacity)</span>
+          <span id="hudOpacityLabel" class="slider-val">85%</span>
+        </div>
+        <input id="hudOpacitySlider" type="range" min="20" max="100" step="5" value="85" class="custom-range-slider">
+      </div>
+
+      <div class="stealth-toggle-row">
+        <div class="stealth-toggle-info">
+          <b>Click trang web để ẩn</b>
+          <small>Click chuột bất kỳ đâu trên trang để giấu HUD</small>
+        </div>
+        <button id="toggleClickDismiss" class="switch small is-on" type="button" role="switch" aria-checked="true" aria-label="Click trang để ẩn">
+          <span></span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Trigger Selector Card -->
+    <section class="card stealth-card">
+      <div class="section-card-header">
+        <span class="section-card-title">PHÍM / CHUỘT PHỤ KÍCH HOẠT</span>
+      </div>
+      <div class="trigger-desc">
+        Kích hoạt song song với <strong class="text-white">Alt + Q</strong> (Alt + Q luôn bật).
+      </div>
+
+      <div class="trigger-input-group">
+        <select id="secondaryPresetSelect" class="trigger-select">
+          <option value="mouse:3">Chuột phụ 1 (Nút Back / Mouse 4)</option>
+          <option value="mouse:4">Chuột phụ 2 (Nút Forward / Mouse 5)</option>
+          <option value="mouse:1">Chuột giữa (Middle Click)</option>
+          <option value="key:F2">Phím F2</option>
+          <option value="key:F4">Phím F4</option>
+          <option value="key:Backquote">Phím ~ (Dấu huyền)</option>
+          <option value="custom">Phím tùy chỉnh...</option>
+          <option value="none">Tắt phím phụ</option>
+        </select>
+        <button id="btnRecordTrigger" type="button" class="btn-record-trigger" title="Nhấn phím hoặc click chuột bất kỳ để gán">
+          <span>Gán Phím</span>
+        </button>
+      </div>
+
+      <div id="triggerStatusText" class="trigger-status-badge">
+        Đang dùng: Chuột phụ 1 (Mouse 4)
+      </div>
+    </section>
+
+    <!-- Result Viewport -->
+    <section class="card result-viewport">
+      <div class="result-header">
+        <div class="result-title">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <span>KẾT QUẢ ĐÁP ÁN</span>
+        </div>
+        <span id="answerHint" class="result-status-pill">Sẵn sàng</span>
+      </div>
+
+      <div id="resultBox" class="result-display-box" title="Nhấn để sao chép đáp án">
+        <div class="answer-badge-container">
+          <strong id="answer" aria-live="polite">-</strong>
+        </div>
+        <p id="resultNote" class="result-note">Click vào khung để sao chép đáp án</p>
+      </div>
+    </section>
+
+    <p id="error" class="error-banner" aria-live="polite"></p>
+
+    <!-- Footer Shortcuts -->
+    <footer class="footer">
+      <div class="footer-shortcuts">
+        <span><kbd>Alt + Q</kbd> Chụp</span>
+        <span><kbd>Alt + W</kbd> Mode</span>
+        <span><kbd>Alt + R</kbd> Restart</span>
+        <span><kbd>Alt + A</kbd> Auto</span>
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="popup.js"></script>
+</body>
+</html>

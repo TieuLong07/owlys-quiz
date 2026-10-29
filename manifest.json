@@ -1,0 +1,75 @@
+{
+  "manifest_version": 3,
+  "name": "Owlys Quiz - AI Exam & Quiz Assistant",
+  "short_name": "Owlys Quiz",
+  "version": "2.2.0",
+  "description": "Chụp và giải đề thi trắc nghiệm tức thì bằng Owlys AI Engine. Hỗ trợ câu đơn và câu chùm (1A - 2B - 3C), HUD tàng hình và phím tắt thông minh.",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://api.owlys.io.vn/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Owlys Quiz",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "commands": {
+    "capture-answer": {
+      "suggested_key": {
+        "default": "Alt+Q"
+      },
+      "description": "Owlys Quiz: Chụp và giải đề"
+    },
+    "toggle-mode": {
+      "suggested_key": {
+        "default": "Alt+W"
+      },
+      "description": "Owlys Quiz: Đổi chế độ Nhanh / Làm Kĩ"
+    },
+    "toggle-auto-wayground": {
+      "suggested_key": {
+        "default": "Alt+A"
+      },
+      "description": "Owlys Quiz: Bật/Tắt Auto Wayground"
+    },
+    "restart-extension": {
+      "suggested_key": {
+        "default": "Alt+R"
+      },
+      "description": "Owlys Quiz: Khởi động lại tiện ích (Panic Restart)"
+    },
+    "toggle-extension": {
+      "description": "Owlys Quiz: Bật/Tắt tiện ích"
+    }
+  }
+}
